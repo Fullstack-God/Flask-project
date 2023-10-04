@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+  style="position: fixed;width: 100%;top: 0;margin-bottom: 50px;">
+  <div class="container-fluid" style="display: flex; justify-content: space-around; align-items: center;">
+    <a class="nav-link" aria-current="page" href="/" style="width:10%; height:50px"><img
+        src="{{ url_for('static', filename='images/logo-favicon/logotypo.png') }}" width="100%" height="40px"
+        class="img-responsive"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="background-color: gray"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mb-2 mb-lg-0" style="display: flex;justify-content: space-around; width: 100%;">
+        <li class="nav-item">
+          <a class="navbar-brand" href="/">ΑΡΧΙΚΗ</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/blog/">BLOG</a>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/base/">ΒΑΣΗ ΑΛΛΗΛΕΓΓΥΗΣ</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/contact/">ΕΠΙΚΟΙΝΩΝΙΑ</a>
+        </li>
+        {% if current_user.is_authenticated %}
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img class="rounded-circle navbar-profile-image" style="width: 30px; height: 30px;"
+              src="{{ url_for('static', filename='images/profiles_images/'+current_user.profile_image) }}"
+              alt="{{ current_user.username }}" data-holder-rendered="true" data-bs-toggle="tooltip"
+              data-bs-placement="top" , title="{{ current_user.username }}">
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <li>
+              <a class="dropdown-item" href="/account/">{{ current_user.username }}</a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="/logout/">Έξοδος</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        {% else %}
+        <div style="display: flex;justify-content: center;align-items: center;font-size: 1.25rem;">
+          <li class="nav-item">
+            <a class=" nav-brand" href="/login/" style="color: black; text-decoration: none;">ΣΥΝΔΕΣΗ</a>
+          </li>|
+          <li class="nav-item">
+            <a class="nav-brand" href="/signup/" style="color: black; text-decoration: none;">ΕΓΓΡΑΦΗ</a>
+          </li>
+        </div>
+
+        {% endif %}
+
+      </ul>
+
+    </div>
+    <form class=" input-group" style="width: auto;" method="POST" action="/search">
+      <input type="search" class="form-control" placeholder="Search" name="search">
+      <button type="submit" style="border: none;"><i class="bi bi-search input-group-text"
+          style="border: none;"></i></button>
+    </form>
+  </div>
+</nav>
